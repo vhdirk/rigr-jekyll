@@ -1,8 +1,10 @@
-# apollo
+# Hephaestus
 
-Modern and minimalistic blog theme powered by [Zola](https://getzola.org). See a live preview [here](https://not-matthias.github.io/apollo).
+Modern and minimalistic blog theme powered by [Zola](https://getzola.org). See a live preview [here](https://vhdirk.github.io/hephaestus).
 
-<sub><sup>Named after the greek god of knowledge, wisdom and intellect</sup></sub>
+<sub><sup>Named after the Greek god of technology and blacksmiths.</sup></sub>
+
+This is a fork of <https://github.com/not-matthias/apollo>
 
 <details open>
   <summary>Dark theme</summary>
@@ -32,15 +34,16 @@ Modern and minimalistic blog theme powered by [Zola](https://getzola.org). See a
 ## Installation
 
 1. Download the theme
+
 ```
-git submodule add https://github.com/not-matthias/apollo themes/apollo
+git submodule add https://github.com/vhdirk/hephaestus themes/hephaestus
 ```
 
-2. Add `theme = "apollo"` to your `config.toml`
+2. Add `theme = "hephaestus"` to your `config.toml`
 3. Copy the example content
 
 ```
-cp -r themes/apollo/content content
+cp -r themes/hephaestus/content content
 ```
 
 ## Options
@@ -73,7 +76,7 @@ These filenames are relative to the root of the site. In this example, the two C
 ### MathJax
 
 To enable MathJax equation rendering, set the variable `mathjax` to `true` in
-the `extra` section of your config.toml. Set `mathjax_dollar_inline_enable` to 
+the `extra` section of your config.toml. Set `mathjax_dollar_inline_enable` to
 `true` to render inline math by surrounding them inside $..$.
 
 ```toml
@@ -84,11 +87,11 @@ mathjax_dollar_inline_enable = true
 
 ## Config
 
- ### Customize `<meta/>` tags 
+### Customize `<meta/>` tags
 
- The following TOML and YAML code will yiled two `<meta/>` tags, `<meta property="og:title" content="the og title"/>`, `<meta property="og:description" content="the og description"/>`. 
+ The following TOML and YAML code will yiled two `<meta/>` tags, `<meta property="og:title" content="the og title"/>`, `<meta property="og:description" content="the og description"/>`.
 
- TOML: 
+ TOML:
 
  ```toml
  title = "post title"
@@ -102,21 +105,21 @@ mathjax_dollar_inline_enable = true
  ]
  ```
 
- YAML: 
+ YAML:
 
  ```yaml
  title: "post title"
  description: "post desc"
  date: "2023-01-01"
- extra: 
-     meta: 
+ extra:
+     meta:
          - property: "og:title"
            content: "the og title"
          - property: "og:description"
            content: "the og description"
  ```
 
- If the `og:title`, the `og:description`, or the "description" are not set, the page's title and description will be used. That is, the following TOML code generates `<meta property="og:title" content="post title"/>`, `<meta property="og:description" content="post desc"/>`, and `<meta property="og:description" content="post desc"/>` as default values. 
+ If the `og:title`, the `og:description`, or the "description" are not set, the page's title and description will be used. That is, the following TOML code generates `<meta property="og:title" content="post title"/>`, `<meta property="og:description" content="post desc"/>`, and `<meta property="og:description" content="post desc"/>` as default values.
 
  ```toml
  title = "post title"
