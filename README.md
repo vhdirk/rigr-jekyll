@@ -3,7 +3,7 @@
 Modern and minimalistic blog theme powered by [Zola](https://getzola.org). See a live preview [here](https://vhdirk.github.io/hephaestus).
 
 This is a fork of <https://github.com/not-matthias/apollo>, which is named after the greek god of knowledge, wisdom and intellect.
-Hephaestus is the lame and ugly son of Apollo, which is apt since I am by no means a designer ¯\_(ツ)_/¯.
+Hephaestus is the lame and ugly son of Apollo, which is apt since I am by no means a designer ¯\\_(ツ)_/¯.
 
 <details open>
   <summary>Light theme</summary>
