@@ -8,16 +8,24 @@ concurrency:
   group: "pages"
   cancel-in-progress: true
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
-        uses: actions/checkout@v3.0.0
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
       - name: build
-        uses: shalzz/zola-deploy-action@v0.17.2
+        uses: shalzz/zola-deploy-action@v0.18.0
         env:
           BUILD_ONLY: true
+
       - name: fix permissions
         run: |
           chmod -c -R +rX "public/" | while read line; do
