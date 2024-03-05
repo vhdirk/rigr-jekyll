@@ -136,7 +136,7 @@ body {
     }
   }
 
-  &.note {
+  &.info, &.note {
     color: var(--callout-note-color);
     border-color: var(--callout-note-color);
     border-left: 0.25em solid var(--callout-note-color);
