@@ -5,16 +5,16 @@ Modern and minimalistic blog theme powered by [Zola](https://getzola.org). See a
 This is a fork of <https://github.com/not-matthias/apollo>, which is named after the greek god of knowledge, wisdom and intellect.
 Hephaestus is the lame and ugly son of Apollo, yet also the god of craftmanship.
 
-<details open>
-  <summary>Dark theme</summary>
-
-  ![blog-dark](./screenshot-dark.png)
-</details>
-
 <details>
   <summary>Light theme</summary>
 
 ![blog-light](./screenshot.png)
+</details>
+
+<details open>
+  <summary>Dark theme</summary>
+
+  ![blog-dark](./screenshot-dark.png)
 </details>
 
 ## Features
@@ -27,6 +27,8 @@ Hephaestus is the lame and ugly son of Apollo, yet also the god of craftmanship.
 - [x] MathJax Rendering
 - [x] Taxonomies
 - [x] Meta Tags For Individual Pages
+- [x] Callouts
+- [x] Outdated Post Warning
 - [ ] Search
 - [ ] Categories
 
@@ -34,14 +36,20 @@ Hephaestus is the lame and ugly son of Apollo, yet also the god of craftmanship.
 
 1. Download the theme
 
-```
+```sh
 git submodule add https://github.com/vhdirk/hephaestus themes/hephaestus
 ```
 
 2. Add `theme = "hephaestus"` to your `config.toml`
-3. Copy the example content
+3. Copy the icons to your static folder
 
+```sh
+cp -r themes/hephaestus/static/icon static/icon
 ```
+
+4. Copy the example content
+
+```sh
 cp -r themes/hephaestus/content content
 ```
 
