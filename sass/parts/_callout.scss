@@ -1,0 +1,72 @@
+.callout {
+    line-height: inherit;
+    margin: 1.25em 0;
+    border-radius: var(--callout-border-radius);
+    border-left: 0.25em solid var(--primary-color);
+    padding: 6px 12px;
+    display: flex;
+    gap: 12px;
+    overflow: auto;
+
+    .icon {
+        margin-top: 2px;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        border: none;
+    }
+
+    .message {
+        p {
+            margin: 0;
+
+            +p {
+                margin: 0.2em 0 0.5em;
+            }
+        }
+    }
+
+    &.info,
+    &.note {
+        color: var(--callout-note-color);
+        border-color: var(--callout-note-color);
+        border-left: 0.25em solid var(--callout-note-color);
+        fill: var(--callout-note-color);
+    }
+
+    &.important {
+        color: var(--callout-important-color);
+        border-color: var(--callout-important-color);
+        border-left-color: var(--callout-important-color);
+        fill: var(--callout-important-color);
+    }
+
+    &.warning {
+        color: var(--callout-warning-color);
+        border-color: var(--callout-warning-color);
+        border-left-color: var(--callout-warning-color);
+        fill: var(--callout-warning-color);
+    }
+
+    &.alert {
+        color: var(--callout-alert-color);
+        border-color: var(--callout-alert-color);
+        border-left-color: var(--callout-alert-color);
+        fill: var(--callout-alert-color);
+    }
+
+    &.question {
+        color: var(--callout-question-color);
+        border-color: var(--callout-question-color);
+        border-left-color: var(--callout-question-color);
+        fill: var(--callout-question-color);
+    }
+
+    &.tip {
+        color: var(--callout-tip-color);
+        border-color: var(--callout-tip-color);
+        border-left-color: var(--callout-tip-color);
+        fill: var(--callout-tip-color);
+    }
+}
