@@ -74,98 +74,6 @@
     </div>
 {% endmacro content %}
 
-{% macro content(page) %}
-<main>
-    <article>
-        <div class="title">
-            {#<h1 class="title">{{ page.title }}</h1>#}
-            {{ post_macros::page_header(title=page.title) }}
-
-                <div class="meta">
-                    {% if page.date %}
-                        Posted on <time>{{ page.date | date(format="%Y-%m-%d") }}</time>
-                    {% endif %}
-
-                    {% if page.draft %}
-                        <span class="draft-label">DRAFT</span>
-                    {% endif %}
-                </div>
-        </div>
-
-        {% if page.extra.tldr %}
-            <div class="tldr">
-                <strong>tl;dr:</strong>
-                {{ page.extra.tldr }}
-            </div>
-        {% endif %}
-
-        {# Optional table of contents #}
-        {% if config.extra.toc | default(value=false) %}
-            {% if page.toc %}
-                <h1>Table of Contents</h1>
-                <ul>
-                {% for h1 in page.toc %}
-                    <li>
-                        <a href="{{ h1.permalink | safe }}">{{ h1.title }}</a>
-                        {% if h1.children %}
-                            <ul>
-                                {% for h2 in h1.children %}
-                                    <li>
-                                        <a href="{{ h2.permalink | safe }}">{{ h2.title }}</a>
-                                    </li>
-
-                                    {% if h2.children %}
-                                    <ul>
-                                        {% for h3 in h2.children %}
-                                            <li>
-                                                <a href="{{ h3.permalink | safe }}">{{ h3.title }}</a>
-                                            </li>
-                                        {% endfor %}
-                                    </ul>
-                                    {% endif %}
-                                {% endfor %}
-                            </ul>
-                        {% endif %}
-                    </li>
-                {% endfor %}
-                </ul>
-            {% endif %}
-        {% endif %}
-
-        <section class="body">
-            {{ page.content | safe }}
-        </section>
-
-        {% if page.taxonomies and page.taxonomies.tags %}
-            <div class="post-tags">
-                <nav class="nav tags">
-                    <ul class="tags">
-                        {% for tag in page.taxonomies.tags %}
-                            <li><a href={{ get_taxonomy_url(kind='tags', name=tag) | safe }}>{{ tag }}</a></li>
-                        {% endfor %}
-                    </ul>
-                </nav>
-            </div>
-        {% endif %}
-
-        {% if page.extra.outdate_alert is defined %}{% set show_outdate_alert = page.extra.outdate_alert %}{% else %}{% set show_outdate_alert = config.extra.outdate_alert %}{% endif %}
-        {% if page.extra.outdate_alert_days is defined %}{% set outdate_alert_days = page.extra.outdate_alert_days %}{% else %}{% set outdate_alert_days = config.extra.outdate_alert_days %}{% endif %}
-
-        {% if show_outdate_alert -%}
-        <blockquote id="outdate_alert" class="callout alert hidden" data-days="{{ outdate_alert_days }}"
-          data-alert-text-before="{{ config.extra.outdate_alert_text_before }}"
-          data-alert-text-after="{{ config.extra.outdate_alert_text_after }}">
-          {% set icon = load_data(path="static/icon/alert.svg") %}
-          <div class="icon">
-            {{ icon | safe }}
-          </div>
-          <div class="content"></div>
-        </blockquote>
-        {% endif %}
-
-    </article>
-</main>
-{% endmacro content %}
 
 {% macro cards_posts(pages) %}
     <div class="cards">
@@ -208,3 +116,24 @@
     {% endfor -%}
     </div>
 {% endmacro cards_posts %}
+
+{% macro attributes(prefix="", data) %}
+  {%- for attr in data %}
+    {{prefix}}-{{attr[0]}}="{{attr[1]}}"
+  {% endfor -%}
+{% endmacro attributes %}
+
+{% macro callout(body="", type="note", header="", id="", data="", class="") %}
+    <blockquote id="{{id}}" class="callout {{type}} {{class}}" {{ self::attributes(prefix="data", data=data) }}>
+        {% set icon = load_data(path="static/icon/" ~ type ~ ".svg") %}
+        <div class="icon">
+            {{ icon | safe }}
+        </div>
+        <div class="message">
+            {% if header %}
+            <p><strong>{{ header }}</strong></p>
+            {% endif %}
+            {{ body | markdown | safe }}
+        </div>
+    </blockquote>
+{% endmacro callout%}

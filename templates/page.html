@@ -1,5 +1,125 @@
 {% extends "base.html" %}
 
 {% block main_content %}
-    {{ post_macros::content(page=page)}}
+
+<main>
+    <article>
+        <div class="title">
+            {#<h1 class="title">{{ page.title }}</h1>#}
+            {{ macros::page_header(title=page.title) }}
+
+                <div class="meta">
+
+                    <div id="date">
+                        {% if page.date %}
+                        <span></span>Posted on <time id="publish">{{ page.date | date(format="%Y-%m-%d") }}</time></span>
+                        {% endif %}
+                        {% if page.updated and page.updated != page.date -%}
+                        <span>Updated on <time id="updated">{{ page.updated | date }}</time></span>
+                        {% endif -%}
+                    </div>
+
+                    {% set config_outdate_callout = config.extra.outdate_callout | default(value=false) %}
+                    {% set config_outdate_callout_days = config.extra.outdate_callout_days | default(value=120) %}
+                    {% set config_outdate_callout_type = config.extra.outdate_callout_type | default(value="alert") %}
+
+                    {% set show_outdate_callout = page.extra.outdate_callout | default(value=config_outdate_callout) %}
+                    {% set outdate_callout_days = page.extra.outdate_callout_days | default(value=config_outdate_callout_days) %}
+                    {% set outdate_callout_type = page.extra.outdate_callout_type | default(value=config_outdate_callout_type) %}
+
+                    {% if show_outdate_callout %}
+
+                    {% set data_outdate_callout_days = ["outdate-days", outdate_callout_days] %}
+                    {% set data_outdate_callout_text_before = ["outdate-text-before", config.extra.outdate_callout_text_before] %}
+                    {% set data_outdate_callout_text_after = ["outdate-text-after", config.extra.outdate_callout_text_after] %}
+
+                      {{
+                        macros::callout(
+                            id="outdate_callout",
+                            class="hidden",
+                            type=outdate_callout_type,
+                            data=[data_outdate_callout_days, data_outdate_callout_text_before, data_outdate_callout_text_after])
+                        }}
+
+{#
+                    <blockquote id="outdate_note" class="callout {{outdate_note_type}} hidden" data-outdate-days="{{ outdate_note_days }}"
+                        data-outdate-text-before="{{ config.extra.outdate_note_text_before }}"
+                        data-outdate-text-after="{{ config.extra.outdate_note_text_after }}">
+                        {% set icon = load_data(path="static/icon/" ~ outdate_note_type ~ ".svg") %}
+                        <div class="icon">
+                            {{ icon | safe }}
+                        </div>
+
+                        <div class="icon">
+                            <img src={{ get_url(path="/icon/" ~ outdate_note_type ~ ".svg") }} />
+                        </div>
+
+                        <div class="message"></div>
+                    </blockquote> #}
+                    {% endif %}
+
+                    {% if page.draft %}
+                        <span class="draft-label">DRAFT</span>
+                    {% endif %}
+                </div>
+        </div>
+
+        {% if page.extra.tldr %}
+            <div class="tldr">
+                <strong>tl;dr:</strong>
+                {{ page.extra.tldr }}
+            </div>
+        {% endif %}
+
+        {# Optional table of contents #}
+        {% if config.extra.toc | default(value=false) %}
+            {% if page.toc %}
+                <h1>Table of Contents</h1>
+                <ul>
+                {% for h1 in page.toc %}
+                    <li>
+                        <a href="{{ h1.permalink | safe }}">{{ h1.title }}</a>
+                        {% if h1.children %}
+                            <ul>
+                                {% for h2 in h1.children %}
+                                    <li>
+                                        <a href="{{ h2.permalink | safe }}">{{ h2.title }}</a>
+                                    </li>
+
+                                    {% if h2.children %}
+                                    <ul>
+                                        {% for h3 in h2.children %}
+                                            <li>
+                                                <a href="{{ h3.permalink | safe }}">{{ h3.title }}</a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endif %}
+
+        <section class="body">
+            {{ page.content | safe }}
+        </section>
+
+        {% if page.taxonomies and page.taxonomies.tags %}
+            <div class="post-tags">
+                <nav class="nav tags">
+                    <ul class="tags">
+                        {% for tag in page.taxonomies.tags %}
+                            <li><a href={{ get_taxonomy_url(kind='tags', name=tag) | safe }}>{{ tag }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </nav>
+            </div>
+        {% endif %}
+
+    </article>
+</main>
 {% endblock main_content %}

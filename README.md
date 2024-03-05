@@ -2,9 +2,8 @@
 
 Modern and minimalistic blog theme powered by [Zola](https://getzola.org). See a live preview [here](https://vhdirk.github.io/hephaestus).
 
-<sub><sup>Named after the Greek god of technology and blacksmiths.</sup></sub>
-
-This is a fork of <https://github.com/not-matthias/apollo>
+This is a fork of <https://github.com/not-matthias/apollo>, which is named after the greek god of knowledge, wisdom and intellect.
+Hephaestus is the lame and ugly son of Apollo, yet also the god of craftmanship.
 
 <details open>
   <summary>Dark theme</summary>

@@ -1,11 +1,19 @@
-{% import "macros/macros.html" as post_macros %}
+{% import "macros/macros.html" as macros %}
 
 <!DOCTYPE html>
-<html class="dark light">
+<html>
 
 {% include "partials/header.html" %}
 
-<body>
+{% set theme = config.extra.theme %}
+{% set theme_class = "" %}
+{% if config.extra.theme is defined %}
+{% if theme == "dark" or theme == "light" %}
+    {% set theme_class = theme %}
+{% endif %}
+{% endif %}
+
+<body class="{{ theme_class }}">
     <div class="content">
         {% include "partials/nav.html" %}
 

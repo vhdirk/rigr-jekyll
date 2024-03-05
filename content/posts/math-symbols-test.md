@@ -12,6 +12,10 @@ date = "2023-01-06"
 
 # Displayed Math
 
+{% note() %}
+    Enable MathJax
+{% end %}
+
 $$
 p := (\sum_{k∈I}{c_k.v_k} + \delta_v.t(x))·(\sum_{k∈I}{c_k.w_k} + \delta_w.t(x)) − (\sum_{k∈I}{c_k.y_k} + \delta_y.t(x))
 $$

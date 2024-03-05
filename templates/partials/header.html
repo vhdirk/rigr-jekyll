@@ -1,4 +1,4 @@
-{% import "macros/macros.html" as post_macros %}
+{% import "macros/macros.html" as macros %}
 
 <head>
     <meta charset="UTF-8">
@@ -8,7 +8,7 @@
     {% if page.extra.meta %}
          <!-- the meta data config goes here  -->
          {% for data in page.extra.meta %}
-             <meta 
+             <meta
                  {% for key, value in data%}
                      {% if key == "property" and value == "og:title"%}
                          {% set_global page_has_og_title = true -%}
@@ -125,19 +125,7 @@
     {# RSS #}
     <link rel="alternate" type="application/atom+xml" title="{{ config.title }}" href="{{ get_url(path="atom.xml", trailing_slash=false) }}">
 
-
-    {% set theme = config.extra.theme %}
-    {% if theme == "dark" %}
-        <link rel="stylesheet" type="text/css" href={{ get_url(path="theme/dark.css") }} />
-    {% elif theme == "light" %}
-        <link rel="stylesheet" type="text/css" href={{ get_url(path="theme/light.css") }} />
-    {% elif theme == "auto" %}
-        <link rel="stylesheet" type="text/css" href={{ get_url(path="theme/light.css") }} />
-        <link rel="stylesheet" type="text/css" href="{{ get_url(path='theme/dark.css') }}" media="(prefers-color-scheme: dark)" />
-    {% elif theme == "toggle" %}
-        <link rel="stylesheet" type="text/css" href={{ get_url(path="theme/light.css") }} />
-        <link id="darkModeStyle" rel="stylesheet" type="text/css" href="{{ get_url(path='theme/dark.css') }}" />
-    {% endif %}
+    <script src="/js/main.js"></script>
 
     <link rel="stylesheet" type="text/css" media="screen" href={{ get_url(path="main.css") }} />
 
