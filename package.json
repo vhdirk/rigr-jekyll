@@ -1,0 +1,35 @@
+{
+  "name": "rigr-jekyll",
+  "version": "0.1.0",
+  "description": "Rigr Jekyll Theme Assets",
+  "repository": "git@github.com:vhdirk/rigr-jekyll.git",
+  "author": "Dirk Van Haerenborgh <vhdirk@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "goatcounter": "https://gitpkg.now.sh/arp242/goatcounter/public?master",
+    "lightense-images": "^1.0.17",
+    "mathjax": "^3.2.2",
+    "umami": "https://gitpkg.now.sh/umami-software/umami/src/tracker/?master"
+  },
+  "scripts": {
+    "build": "parcel build",
+    "postinstall": "cp node_modules/umami/index.js _scripts/umami.js; cp node_modules/goatcounter/count.js _scripts/goatcounter.js"
+  },
+  "devDependencies": {
+    "parcel": "^2.12.0"
+  },
+  "source": [
+    "_scripts/main.ts",
+    "_scripts/umami.js",
+    "_scripts/goatcounter.js"
+  ],
+  "targets": {
+    "default": {
+      "distDir": "assets/js",
+      "scopeHoist": true,
+      "context": "browser",
+      "outputFormat": "global",
+      "includeNodeModules": true
+    }
+  }
+}

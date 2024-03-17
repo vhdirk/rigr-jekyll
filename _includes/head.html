@@ -1,0 +1,170 @@
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  {% if page.meta %}
+    <!-- the meta data config goes here -->
+    {% for data in page.meta %}
+      <meta
+        {% for kv in data %}
+        {% if kv[0] == "property" && kv[1] == "og:title" %}
+        {% assign page_has_og_title = true -%}
+        {% endif %}
+        {% if kv[0] == "property" && kv[1] == "og:description" %}
+        {% assign page_has_og_description = true -%}
+        {% endif %}
+        {% if kv[0] == "name" && kv[1] == "description" %}
+        {% assign page_has_description = true -%}
+        {% endif %}
+        {{ kv[0] }}
+        ="{{ kv[1] }}"
+        {% endfor %} />
+    {% endfor %}
+{% endif %}
+
+  {%- comment -%} Site title {%- endcomment -%}
+  {% assign current_path = page.path | default(value = "/" ) %}
+  {% if current_path == "/" %}
+    <title>
+      {{ site.title | default(value="Home" ) }}
+    </title>
+
+    {% if !page_has_og_title %}
+      <meta property="og:title" content="{{ site.title | default(value="Home") }}" />
+    {% endif %}
+
+  {% else %}
+    <title>
+      {% if page.title %}
+        {{ page.title }}
+      {% else if site.title %}
+        {{ site.title }}
+      {% else %}
+        Post
+      {% endif %}
+    </title>
+
+    {% if !page_has_og_title %}
+      <meta property="og:title" content="{% if page.title -%}{{ page.title }}{% else if site.title -%}{{ site.title }}{% else -%}Post{% endif -%}" />
+    {% endif %}
+  {% endif %}
+
+  {% if !page_has_og_description %}
+    {% if page.description %}
+      <meta property="og:description" content="{{ page.description }}" />
+    {% else if site.description %}
+      <meta property="og:description" content="{{ site.description }}" />
+    {% endif %}
+  {% endif %}
+
+  {% if !page_has_description %}
+    {% if page.description %}
+      <meta name="description" content="{{ page.description }}" />
+    {% else if site.description %}
+      <meta name="description" content="{{ site.description }}" />
+    {% endif %}
+  {% endif %}
+
+  {% comment %} Favicon {% endcomment %}
+  {% if site.favicon %}
+    <link
+      rel="icon"
+      type="image/png"
+      href={{ site.favicon }} />
+  {% endif %}
+
+  {% if page.url && site.url %}
+    <link rel="canonical" href="{{ page.url | absolute_url }}">
+  {% endif %}
+
+  {%- comment -%} Font from cdn or disk {%- endcomment -%}
+  {% if site.use_cdn | default(value=false) %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/space-grotesk@4.5.8/index.min.css">
+  {% else %}
+    <link href={{ '/assets/css/fonts.css' | absolute_url }} rel="stylesheet" />
+  {% endif %}
+
+  {%- comment -%} Analytics {%- endcomment -%}
+  {% if site.analytics.enabled %}
+    {% if site.analytics.umami.website_id %}
+      {% assign website_id = site.analytics.umami.website_id %}
+      {% assign host_url = site.analytics.umami.host_url | default(value = "https://eu.umami.is" ) %}
+      {% if site.use_cdn %}
+        {% assign script_src = host_url + "/umami.js" %}
+      {% else %}
+        {% assign script_src = "/assets/js/umami.js" | absolute_url %}
+      {% endif %}
+      <script
+        defer
+        src="{{ script_src }}"
+        data-website-id="{{ site.analytics.umami.website_id }}"
+        data-host-url="{{ host_url }}"></script>
+    {% endif %}
+
+    {% if site.analytics.goatcounter.user %}
+      {% assign user = site.analytics.goatcounter.user %}
+      {% assign host = site.analytics.goatcounter.host | default(value = "goatcounter.com" ) %}
+
+      {% if site.use_cdn %}
+        {% assign script_src = "https://gc.zgo.at/count.js" %}
+      {% else %}
+        {% assign script_src = "/assets/js/goatcounter.js" | absolute_url %}
+      {% endif %}
+
+      <script
+        defer
+        src="{{ script_src }}"
+        data-goatcounter="https://{{ user }}.{{ host }}/count"></script>
+    {% endif %}
+
+    {% if site.analytics.google.id %}
+      <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', '{{ site.analytics.google.id }}', 'auto');
+        ga('send', 'pageview');
+      </script>
+    {% endif %}
+
+  {% endif %}
+
+
+  {% if site.mathjax %}
+    {% if site.mathjax_dollar_inline_enable %}
+      <script>
+        MathJax = {
+            tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+      </script>
+    {% endif %}
+    <script src="/js/mathjax.js"></script>
+
+  {% endif %}
+
+  {%- comment -%} RSS {%- endcomment -%}
+  <link
+    rel="alternate"
+    type="application/rss+xml"
+    title="RSS"
+    href="{{ '/atom.xml' | absolute_url }}">
+
+  <script src="{{ "/assets/js/main.js" | absolute_url }}"></script>
+
+  <link
+    rel="stylesheet"
+    type="text/css"
+    media="screen"
+    href="{{ '/assets/css/main.css' | absolute_url }}">
+
+  {% if site.stylesheets %}
+    {% for stylesheet in site.stylesheets %}
+      <link rel="stylesheet" href="{{ stylesheet | absolute_url }}">
+    {% endfor %}
+  {% endif %}
+</head>

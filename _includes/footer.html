@@ -1,0 +1,13 @@
+<footer>
+  <div class="copyright">
+    {{ site.footer_copyright | trim | markdown | safe }}
+  </div>
+  {% if site.footer_credits %}
+  <div class="credits">
+    powered by
+    <a href="https://www.jekyllrb.org" target="_blank" rel='noreferrer noopener'>zola</a>
+    and
+    <a href="https://github.com/vhdirk/rigr-jekyll" target="_blank" rel='noreferrer noopener'>rigr</a>
+  </div>
+  {% endif %}
+</footer>

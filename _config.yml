@@ -1,0 +1,69 @@
+# Setup
+title:               Rigr
+tagline:             'A simple & modern nordic theme'
+description:         'A simple & modern nordic theme.'
+url:                 http://github.com/vhdirk/rigr-jekyll
+baseurl:             ''
+permalink:           pretty
+
+# About/contact
+author:
+  name:              Dirk Van Haerenborgh
+  url:               https://vhdirk.github.io
+  email:             vhdirk@gmail.com
+
+sass:
+  style: compact # possible values: nested expanded compact compressed
+  sass_dir: _sass
+
+webrick:
+  headers:
+    Access-Control-Allow-Origin: "*"
+webserver_headers:
+  "Access-Control-Allow-Origin": "*"
+  "Server": "CustomServerName"
+
+
+plugins:
+  - jekyll-paginate
+
+use_cdn: true
+
+theme_variant: "toggle"
+
+analytics:
+  enabled: false
+  # umami:
+  #   host_url: https://eu.umami.is
+  #   website_id: ""
+  # goatcounter:
+  #   user: ""
+  #   host: "goatcounter.com"
+
+  # google:
+  #   id: ""
+
+menu:
+  - name: /posts
+    url: /posts
+    weight: 1
+  - name: /projects
+    url: /projects
+    weight: 2
+  - name: /about
+    url: /about
+    weight: 3
+
+
+socials:
+  - name: github
+    url: "https://github.com/vhdirk/"
+    icon: github
+
+
+exclude:
+  - "node_modules"
+  - "_scripts"
+  - ".parcel-cache"
+
+

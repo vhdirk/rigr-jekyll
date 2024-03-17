@@ -1,0 +1,20 @@
+[tools]
+ruby = "latest"
+
+
+[env]
+GEM_HOME="{{config_root}}/.gems"
+BUNDLE_BIN="{{env.GEM_HOME}}/bin"
+_.path = [
+    "{{env.BUNDLE_BIN}}",
+    "{{config_root}}/node_modules/.bin",
+]
+
+
+[tasks.serve]
+run = [
+    'parcel watch &',
+    'jekyll serve --livereload',
+]
+
+

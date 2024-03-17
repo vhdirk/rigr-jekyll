@@ -1,1 +1,8 @@
-public/
+.gems
+.parcel-cache
+.jekyll-cache
+node_modules
+
+_site
+
+yarn-error.log
