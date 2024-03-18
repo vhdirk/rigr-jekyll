@@ -12,9 +12,9 @@ _.path = [
 
 
 [tasks.serve]
-run = [
-    'parcel watch &',
-    'jekyll serve --livereload',
-]
+run = """jekyll serve --livereload"""
 
-
+[tasks."build:js"]
+run = """parcel build"""
+sources = ['package.json', '_scripts/*']
+outputs = ['assets/js']

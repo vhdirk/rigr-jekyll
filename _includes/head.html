@@ -8,13 +8,13 @@
     {% for data in page.meta %}
       <meta
         {% for kv in data %}
-        {% if kv[0] == "property" && kv[1] == "og:title" %}
+        {% if kv[0] == "property" and kv[1] == "og:title" %}
         {% assign page_has_og_title = true -%}
         {% endif %}
-        {% if kv[0] == "property" && kv[1] == "og:description" %}
+        {% if kv[0] == "property" and kv[1] == "og:description" %}
         {% assign page_has_og_description = true -%}
         {% endif %}
-        {% if kv[0] == "name" && kv[1] == "description" %}
+        {% if kv[0] == "name" and kv[1] == "description" %}
         {% assign page_has_description = true -%}
         {% endif %}
         {{ kv[0] }}
@@ -74,7 +74,7 @@
       href={{ site.favicon }} />
   {% endif %}
 
-  {% if page.url && site.url %}
+  {% if page.url and site.url %}
     <link rel="canonical" href="{{ page.url | absolute_url }}">
   {% endif %}
 

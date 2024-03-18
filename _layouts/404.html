@@ -1,8 +1,9 @@
-{% extends "page.html" %}
+---
+layout: page
+title: 404
+---
 
-{% block main_content %}
-    <main class="centered-header">
-        {{ macros::page_header(title="404")}}
-        <span>Page not found :(</span>
-    </main>
-{% endblock main_content %}
+<main class="centered-header">
+    {% include page_header.html title="404" %}
+    <span>Page not found :(</span>
+</main>

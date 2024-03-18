@@ -1,35 +1,65 @@
-{% extends "base.html" %}
+---
+layout: base
+---
 
-{% block main_content %}
-    {% if section.extra.section_path -%}
-        {% set section = get_section(path=section.extra.section_path) %}
-    {% endif -%}
 
-    {{ macros::page_header(title=section.title) }}
+{% include page_header.html title=include.collection.title %}
 
-    <main>
-        {%- if paginator %}
-            {%- set show_pages = paginator.pages -%}
+<main>
+  {%- if paginator %}
+    {%- assign show_pages = paginator.pages -%}
+  {% else %}
+    {%- assign show_pages = include.collection.pages -%}
+  {% endif -%}
+
+  <div class="cards">
+
+    {%- for page in include.collection %}
+      <div class="card">
+        {% if page.local_image %}
+          <img
+            class="card-image"
+            alt="{{ page.local_image }}"
+            src="{{ page.local_image |absolute_url }}" />
+        {% else if page.remote_image %}
+          <img
+            class="card-image"
+            alt="{{ page.remote_image }}"
+            src="{{ page.remote_image }}" />
         {% else %}
-            {%- set show_pages = section.pages -%}
-        {% endif -%}
+          <div class="card-image-placeholder"></div>
+        {% endif %}
 
-        {{ macros::cards_posts(pages=show_pages) }}
-    </main>
-
-    {% if paginator %}
-        <ul class="pagination">
-            {% if paginator.previous %}
-                <span class="page-item page-prev">
-                    <a href={{ paginator.previous }} class="page-link" aria-label="Previous"><span aria-hidden="true">← Prev</span></a>
-                </span>
+        <div class="card-info">
+          <h1 class="card-title">
+            {% if page.link_to %}
+              <a href="{{ page.link_to }}">{{ page.title }}</a>
+            {% else %}
+              <a href="{{ page.permalink }}">{{ page.title }}</a>
             {% endif %}
+          </h1>
 
-            {% if paginator.next %}
-                <span class="page-item page-next">
-                    <a href={{ paginator.next }} class="page-link" aria-label="Next"><span aria-hidden="true">Next →</span></a>
-                </span>
+          <div class="meta">
+            {%- if page.date %}
+              <time>{{ page.date | date: "%Y-%m-%d" }}</time>
+            {% endif -%}
+            {% if page.draft %}
+              <span class="draft-label">DRAFT</span>
             {% endif %}
-        </ul>
-    {% endif %}
-{% endblock main_content %}
+          </div>
+
+          <div class="card-description">
+            {% if page.description %}
+              {{ page.description }}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+    {% endfor -%}
+  </div>
+</main>
+
+{% if paginator %}
+  {% include paginator.html %}
+{% endif %}

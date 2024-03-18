@@ -1,0 +1,36 @@
+<ul>
+  {%- for post in include.posts %}
+    <section class="list-item">
+      <div class="post-header">
+        <time>{{ post.date | date(format="%Y-%m-%d" ) }}</time>
+
+        <div>
+          <h1 class="title">
+            <a href="{{ post.permalink }}">{{ post.title }}</a>
+
+            {% if post.draft %}
+              <span class="draft-label">DRAFT</span>
+            {% endif %}
+          </h1>
+
+          <div class="meta">
+            <div class="description">
+              {% if post.description %}
+                {{ post.description }}
+              {% else if post.summary %}
+                {{ post.summary | safe }}&hellip;
+              {% else %}
+                {% assign hide_read_more = true %}
+              {% endif %}
+            </div>
+
+            {% if !hide_read_more %}
+              <a class="readmore" href="{{ post.permalink }}">Read more ⟶</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </section>
+
+  {% endfor -%}
+</ul>

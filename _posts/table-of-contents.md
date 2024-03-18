@@ -1,6 +1,7 @@
 ---
-title = "Table of Contents Test"
-date = "2022-01-02"
+layout: page
+title: "Table of Contents Test"
+date: "2022-01-02"
 ---
 
 # Heading 1

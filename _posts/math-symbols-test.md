@@ -1,6 +1,7 @@
 ---
-title = "Math Symbol Support Test"
-date = "2023-01-06"
+layout: page
+title: "Math Symbol Support Test"
+date: "2023-01-06"
 ---
 
 # Inline Math

@@ -1,6 +1,7 @@
 ---
-title = "Markdown Test"
-date = "2022-01-01"
+layout: page
+title: "Markdown Test"
+date: "2022-01-01"
 ---
 
 ## Code Block

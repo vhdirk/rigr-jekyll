@@ -1,0 +1,12 @@
+<blockquote id="{{include.id}}" class="callout {{include.type}} {{include.class}}" {{ self::attributes(prefix="data", data=data) }}>
+    {% assign icon = "static/icon/" | append: type | append: ".svg" |absolute_url %}
+    <div class="icon">
+        {{ icon | safe }}
+    </div>
+    <div class="message">
+        {% if header %}
+        <p><strong>{{ header }}</strong></p>
+        {% endif %}
+        {{ body | markdown | safe }}
+    </div>
+</blockquote>

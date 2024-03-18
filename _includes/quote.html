@@ -1,0 +1,10 @@
+<blockquote class="quote">
+  {% assign icon = "static/icon/quote.svg" | absolute_url %}
+  <div class="icon" style="display: none;">{{ icon | safe }}</div>
+  <div class="content">{{ include.body | markdown | safe }}</div>
+  {% if include.cite %}
+  <div class="from">
+    {{ "— " | append: include.cite | markdown | safe }}
+  </div>
+  {% endif %}
+</blockquote>

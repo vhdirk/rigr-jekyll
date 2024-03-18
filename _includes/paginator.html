@@ -1,0 +1,16 @@
+{% if paginator.previous_page %}
+    <span class="page-item page-prev">
+
+    {% if paginator.page == 2 %}
+    <a href="{{ '/' | absolute_url }}" class="page-link" aria-label="Previous"><span aria-hidden="true">← Prev</span></a>
+    {% else %}
+    <a href="{{ paginator.previous_page_path | absolute_url }}" class="page-link" aria-label="Previous"><span aria-hidden="true">← Prev</span></a>
+    {% endif %}
+    </span>
+{% endif %}
+
+{% if paginator.next_page %}
+    <span class="page-item page-next">
+    <a href="{{ paginator.next_page_path | absolute_url }}" class="page-link" aria-label="Next"><span aria-hidden="true">Next →</span></a>
+</span>
+{% endif %}
