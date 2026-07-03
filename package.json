@@ -8,7 +8,7 @@
   "dependencies": {
     "goatcounter": "https://gitpkg.now.sh/arp242/goatcounter/public?master",
     "lightense-images": "^1.0.17",
-    "mathjax": "^3.2.2",
+    "mathjax": "^4.0.0",
     "umami": "https://gitpkg.now.sh/umami-software/umami/src/tracker/?master"
   },
   "scripts": {
